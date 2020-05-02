@@ -8,9 +8,10 @@ import java.nio.file.Path;
 import java.util.List;
 
 public interface DataParser<T, O> {
-    List<T> read(Path path) throws IOException;
+  List<T> read(Path path) throws IOException;
 
-    List<O> convert(List<T> records);
+  List<O> convert(List<T> records);
 
-    String write(List<O> records) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException;
+  String write(List<O> records)
+      throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException;
 }

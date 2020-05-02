@@ -13,6 +13,7 @@ import java.util.List;
 public class MarketDataParser {
   public static void main(String[] args)
       throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+
     BseDataParser bseDataParser = new BseDataParser();
     final List<BseInputRecord> bseInputRecords =
         bseDataParser.read(Paths.get("/Users/kndarpp/kndarp/files/EQ300420.CSV"));
