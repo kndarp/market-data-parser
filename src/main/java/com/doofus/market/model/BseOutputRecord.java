@@ -1,33 +1,42 @@
 package com.doofus.market.model;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvBindByPosition;
 
 public class BseOutputRecord implements CSVRecord {
 
   // <ticker>,<date>,<open>,<high>,<low>,<close>,<volume>,<o/i>
 
   @CsvBindByName(column = "<ticker>")
+  @CsvBindByPosition(position = 0)
   private String ticker;
 
   @CsvBindByName(column = "<date>")
+  @CsvBindByPosition(position = 1)
   private String date;
 
   @CsvBindByName(column = "<open>")
+  @CsvBindByPosition(position = 2)
   private float open;
 
   @CsvBindByName(column = "<high>")
+  @CsvBindByPosition(position = 3)
   private float high;
 
   @CsvBindByName(column = "<low>")
+  @CsvBindByPosition(position = 4)
   private float low;
 
   @CsvBindByName(column = "<close>")
+  @CsvBindByPosition(position = 5)
   private float close;
 
   @CsvBindByName(column = "<volume>")
+  @CsvBindByPosition(position = 6)
   private long volume;
 
   @CsvBindByName(column = "<o/i>")
+  @CsvBindByPosition(position = 7)
   private long oi;
 
   public String getTicker() {
