@@ -3,13 +3,12 @@ package com.doofus.market;
 import com.opencsv.bean.BeanField;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
-public class MarketOutputMappingStategy<T> extends ColumnPositionMappingStrategy<T> {
+public class MarketOutputMappingStrategy<T> extends ColumnPositionMappingStrategy<T> {
   @Override
-  public String[] generateHeader(T bean) throws CsvRequiredFieldEmptyException {
+  public String[] generateHeader(T bean) {
 
     super.setColumnMapping(new String[FieldUtils.getAllFields(bean.getClass()).length]);
     final int numColumns = bean.getClass().getDeclaredFields().length;

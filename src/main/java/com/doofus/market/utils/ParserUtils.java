@@ -20,7 +20,4 @@ public class ParserUtils {
     }
   }
 
-  static String getDirectoryPath(String filePath) {
-    return FilenameUtils.getFullPath(filePath);
-  }
 }

@@ -41,13 +41,13 @@ public class BseDataParser implements DataParser<BseInputRecord, BseOutputRecord
   public String write(List<BseOutputRecord> records)
       throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
     try (Writer writer = new StringWriter()) {
-      MarketOutputMappingStategy<BseOutputRecord> marketOutputMappingStategy =
-          new MarketOutputMappingStategy<>();
-      marketOutputMappingStategy.setType(BseOutputRecord.class);
+      MarketOutputMappingStrategy<BseOutputRecord> marketOutputMappingStrategy =
+          new MarketOutputMappingStrategy<>();
+      marketOutputMappingStrategy.setType(BseOutputRecord.class);
 
       StatefulBeanToCsv<BseOutputRecord> statefulBeanToCsv =
           new StatefulBeanToCsvBuilder<BseOutputRecord>(writer)
-              .withMappingStrategy(marketOutputMappingStategy)
+              .withMappingStrategy(marketOutputMappingStrategy)
               .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
               .withApplyQuotesToAll(false)
               .build();
