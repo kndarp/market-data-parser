@@ -5,24 +5,42 @@ import com.doofus.market.model.BseOutputRecord;
 import com.doofus.market.utils.ParserUtils;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
+
+import static com.doofus.market.utils.ParserUtils.unzip;
 
 /** Hello world! */
 public class MarketDataParser {
   public static void main(String[] args)
       throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
 
-    final String filePath = args[0];
-
+    final String zipPath = args[0];
     BseDataParser bseDataParser = new BseDataParser();
-    final List<BseInputRecord> bseInputRecords = bseDataParser.read(Paths.get(filePath));
-    final List<BseOutputRecord> bseOutputRecords = bseDataParser.convert(bseInputRecords);
-    bseOutputRecords.forEach(
-        bseOutputRecord -> bseOutputRecord.setDate(ParserUtils.getDateForRecords(filePath)));
+    unzip(zipPath)
+        .forEach(
+            filePath -> {
+              try {
+                final List<BseInputRecord> bseInputRecords =
+                    bseDataParser.read(Paths.get(filePath));
 
-    System.out.println(bseDataParser.write(bseOutputRecords));
+                final List<BseOutputRecord> bseOutputRecords =
+                    bseDataParser.convert(bseInputRecords);
+                bseOutputRecords.forEach(
+                    bseOutputRecord ->
+                        bseOutputRecord.setDate(ParserUtils.getDateForRecords(filePath)));
+
+                System.out.println(bseDataParser.write(bseOutputRecords));
+              } catch (IOException
+                  | CsvDataTypeMismatchException
+                  | CsvRequiredFieldEmptyException e) {
+                e.printStackTrace();
+              } finally {
+                ParserUtils.delete(filePath);
+              }
+            });
   }
 }
