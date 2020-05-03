@@ -7,6 +7,7 @@ import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -14,8 +15,7 @@ import static com.doofus.market.utils.ParserUtils.unzip;
 
 /** Hello world! */
 public class MarketDataParser {
-  public static void main(String[] args)
-      throws IOException {
+  public static void main(String[] args) throws IOException {
 
     final String zipPath = args[0];
     BseDataParser bseDataParser = new BseDataParser();
@@ -33,12 +33,8 @@ public class MarketDataParser {
                         bseOutputRecord.setDate(ParserUtils.getDateForRecords(filePath)));
 
                 System.out.println(bseDataParser.write(bseOutputRecords));
-              } catch (IOException
-                  | CsvDataTypeMismatchException
-                  | CsvRequiredFieldEmptyException e) {
-                e.printStackTrace();
-              } finally {
-                ParserUtils.delete(filePath);
+              } catch (FileNotFoundException e) {
+                  e.printStackTrace();
               }
             });
   }

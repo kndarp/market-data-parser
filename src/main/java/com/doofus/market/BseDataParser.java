@@ -2,7 +2,6 @@ package com.doofus.market;
 
 import com.doofus.market.model.BseInputRecord;
 import com.doofus.market.model.BseOutputRecord;
-import com.doofus.market.utils.ParserUtils;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.StatefulBeanToCsv;
@@ -13,30 +12,33 @@ import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class BseDataParser implements DataParser<BseInputRecord, BseOutputRecord> {
   @Override
-  public List<BseInputRecord> read(Path path) throws IOException {
+  public List<BseInputRecord> read(Path path) {
 
     try (Reader reader = Files.newBufferedReader(path)) {
       return new CsvToBeanBuilder<BseInputRecord>(reader)
           .withType(BseInputRecord.class)
           .build()
           .parse();
+    } catch (IOException e) {
+      throw new RuntimeException("Exception in read()", e);
     }
   }
 
   @Override
-  public List<BseInputRecord> read(InputStream inputStream) throws IOException {
+  public List<BseInputRecord> read(InputStream inputStream) {
 
     try (Reader reader = new InputStreamReader(inputStream)) {
       return new CsvToBeanBuilder<BseInputRecord>(reader)
           .withType(BseInputRecord.class)
           .build()
           .parse();
+    } catch (IOException e) {
+      throw new RuntimeException("Exception in read()", e);
     }
   }
 
@@ -48,8 +50,7 @@ public class BseDataParser implements DataParser<BseInputRecord, BseOutputRecord
   }
 
   @Override
-  public String write(List<BseOutputRecord> records)
-      throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+  public String write(List<BseOutputRecord> records) {
     try (Writer writer = new StringWriter()) {
       MarketOutputMappingStrategy<BseOutputRecord> marketOutputMappingStrategy =
           new MarketOutputMappingStrategy<>();
@@ -63,6 +64,8 @@ public class BseDataParser implements DataParser<BseInputRecord, BseOutputRecord
               .build();
       statefulBeanToCsv.write(records);
       return writer.toString();
+    } catch (IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e) {
+      throw new RuntimeException("Exception in write()", e);
     }
   }
 }
