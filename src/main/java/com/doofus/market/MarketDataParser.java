@@ -5,10 +5,9 @@ import com.doofus.market.model.BseOutputRecord;
 import com.doofus.market.utils.ParserUtils;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
-import org.apache.commons.io.FilenameUtils;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.List;
 
 import static com.doofus.market.utils.ParserUtils.unzip;
@@ -16,7 +15,7 @@ import static com.doofus.market.utils.ParserUtils.unzip;
 /** Hello world! */
 public class MarketDataParser {
   public static void main(String[] args)
-      throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+      throws IOException {
 
     final String zipPath = args[0];
     BseDataParser bseDataParser = new BseDataParser();
@@ -25,7 +24,7 @@ public class MarketDataParser {
             filePath -> {
               try {
                 final List<BseInputRecord> bseInputRecords =
-                    bseDataParser.read(Paths.get(filePath));
+                    bseDataParser.read(new FileInputStream(filePath));
 
                 final List<BseOutputRecord> bseOutputRecords =
                     bseDataParser.convert(bseInputRecords);
