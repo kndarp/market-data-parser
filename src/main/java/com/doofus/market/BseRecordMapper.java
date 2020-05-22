@@ -1,7 +1,7 @@
 package com.doofus.market;
 
-import com.doofus.market.model.BseInputRecord;
-import com.doofus.market.model.BseOutputRecord;
+import com.doofus.market.model.bse.equity.BseEquityInputRecord;
+import com.doofus.market.model.bse.equity.BseEquityOutputRecord;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -17,5 +17,5 @@ public interface BseRecordMapper {
     @Mapping(source = "netTurnov", target = "volume"),
     @Mapping(source = "noOfShares", target = "oi")
   })
-  BseOutputRecord bseInputToOutputRecord(BseInputRecord bseInputRecord);
+  BseEquityOutputRecord bseInputToOutputRecord(BseEquityInputRecord bseEquityInputRecord);
 }

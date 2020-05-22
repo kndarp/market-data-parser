@@ -1,33 +1,33 @@
 package com.doofus.market;
 
-import com.doofus.market.model.BseInputRecord;
-import com.doofus.market.model.BseOutputRecord;
+import com.doofus.market.model.bse.equity.BseEquityInputRecord;
+import com.doofus.market.model.bse.equity.BseEquityOutputRecord;
 
 /*
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-05-03T15:37:31+0200",
+    date = "2020-05-04T00:02:03+0200",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.2 (Oracle Corporation)"
 )
 */
 public class BseRecordMapperImpl implements BseRecordMapper {
 
     @Override
-    public BseOutputRecord bseInputToOutputRecord(BseInputRecord bseInputRecord) {
-        if ( bseInputRecord == null ) {
+    public BseEquityOutputRecord bseInputToOutputRecord(BseEquityInputRecord bseEquityInputRecord) {
+        if ( bseEquityInputRecord == null ) {
             return null;
         }
 
-        BseOutputRecord bseOutputRecord = new BseOutputRecord();
+        BseEquityOutputRecord bseEquityOutputRecord = new BseEquityOutputRecord();
 
-        bseOutputRecord.setVolume( (long) bseInputRecord.getNetTurnov() );
-        bseOutputRecord.setTicker( bseInputRecord.getScName() );
-        bseOutputRecord.setOi( bseInputRecord.getNoOfShares() );
-        bseOutputRecord.setOpen( bseInputRecord.getOpen() );
-        bseOutputRecord.setHigh( bseInputRecord.getHigh() );
-        bseOutputRecord.setLow( bseInputRecord.getLow() );
-        bseOutputRecord.setClose( bseInputRecord.getClose() );
+        bseEquityOutputRecord.setVolume( (long) bseEquityInputRecord.getNetTurnov() );
+        bseEquityOutputRecord.setTicker( bseEquityInputRecord.getScName() );
+        bseEquityOutputRecord.setOi( bseEquityInputRecord.getNoOfShares() );
+        bseEquityOutputRecord.setOpen( bseEquityInputRecord.getOpen() );
+        bseEquityOutputRecord.setHigh( bseEquityInputRecord.getHigh() );
+        bseEquityOutputRecord.setLow( bseEquityInputRecord.getLow() );
+        bseEquityOutputRecord.setClose( bseEquityInputRecord.getClose() );
 
-        return bseOutputRecord;
+        return bseEquityOutputRecord;
     }
 }

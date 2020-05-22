@@ -1,17 +1,19 @@
 package com.doofus.market;
 
-import com.doofus.market.model.BseInputRecord;
+import com.doofus.market.model.bse.equity.BseEquityInputRecord;
+import com.doofus.market.model.bse.equity.BseEquityOutputRecord;
 
 import java.io.InputStream;
+import java.io.Writer;
 import java.nio.file.Path;
 import java.util.List;
 
 public interface DataParser<T, O> {
-  List<BseInputRecord> read(InputStream inputStream);
+  List<BseEquityInputRecord> read(InputStream inputStream);
 
-  List<BseInputRecord> read(Path path);
+  List<BseEquityInputRecord> read(Path path);
 
   List<O> convert(List<T> records);
 
-  String write(List<O> records);
+  String write(List<BseEquityOutputRecord> records, Writer writer);
 }

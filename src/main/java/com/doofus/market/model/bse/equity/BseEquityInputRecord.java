@@ -1,8 +1,9 @@
-package com.doofus.market.model;
+package com.doofus.market.model.bse.equity;
 
+import com.doofus.market.model.CSVRecord;
 import com.opencsv.bean.CsvBindByName;
 
-public class BseInputRecord implements CSVRecord {
+public class BseEquityInputRecord implements CSVRecord {
 
   // SC_CODE,SC_NAME,SC_GROUP,SC_TYPE,OPEN,HIGH,LOW,CLOSE,LAST,PREVCLOSE,NO_TRADES,NO_OF_SHRS,NET_TURNOV,TDCLOINDI
 
@@ -61,7 +62,7 @@ public class BseInputRecord implements CSVRecord {
   }
 
   public void setScName(String scName) {
-    this.scName = scName;
+    this.scName = scName.trim();
   }
 
   public String getScGroup() {

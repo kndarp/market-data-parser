@@ -1,9 +1,10 @@
-package com.doofus.market.model;
+package com.doofus.market.model.bse.equity;
 
+import com.doofus.market.model.CSVRecord;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
 
-public class BseOutputRecord implements CSVRecord {
+public class BseEquityOutputRecord implements CSVRecord {
 
   // <ticker>,<date>,<open>,<high>,<low>,<close>,<volume>,<o/i>
 
