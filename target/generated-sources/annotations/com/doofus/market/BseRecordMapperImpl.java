@@ -2,14 +2,13 @@ package com.doofus.market;
 
 import com.doofus.market.model.bse.equity.BseEquityInputRecord;
 import com.doofus.market.model.bse.equity.BseEquityOutputRecord;
+import javax.annotation.Generated;
 
-/*
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-05-22T20:20:13+0200",
-    comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.2 (Oracle Corporation)"
+    date = "2020-05-24T00:16:07+0200",
+    comments = "version: 1.3.1.Final, compiler: javac, environment: Java 1.8.0_232 (AdoptOpenJDK)"
 )
-*/
 public class BseRecordMapperImpl implements BseRecordMapper {
 
     @Override
