@@ -10,6 +10,7 @@ import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -50,7 +51,7 @@ public class BseDataParser implements DataParser<BseEquityInputRecord, BseEquity
   }
 
   @Override
-  public String write(List<BseEquityOutputRecord> records, Writer writer) {
+  public byte[] write(List<BseEquityOutputRecord> records, Writer writer) {
     try {
       MarketOutputMappingStrategy<BseEquityOutputRecord> marketOutputMappingStrategy =
           new MarketOutputMappingStrategy<>();
@@ -63,7 +64,7 @@ public class BseDataParser implements DataParser<BseEquityInputRecord, BseEquity
               .withApplyQuotesToAll(false)
               .build();
       statefulBeanToCsv.write(records);
-      return writer.toString();
+      return writer.toString().getBytes(StandardCharsets.UTF_8);
     } catch (CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e) {
       throw new RuntimeException("Exception in write()", e);
     }

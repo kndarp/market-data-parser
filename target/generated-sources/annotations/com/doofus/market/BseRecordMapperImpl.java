@@ -6,7 +6,7 @@ import com.doofus.market.model.bse.equity.BseEquityOutputRecord;
 /*
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-05-04T00:02:03+0200",
+    date = "2020-05-22T20:20:13+0200",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.2 (Oracle Corporation)"
 )
 */

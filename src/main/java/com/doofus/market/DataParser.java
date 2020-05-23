@@ -15,5 +15,5 @@ public interface DataParser<T, O> {
 
   List<O> convert(List<T> records);
 
-  String write(List<BseEquityOutputRecord> records, Writer writer);
+  byte[] write(List<BseEquityOutputRecord> records, Writer writer);
 }
